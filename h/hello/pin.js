@@ -17,3 +17,39 @@ function generatePin(){
  }
 
 
+document.getElementById('kay-pad').addEventListener('click',function(event){
+   const number = event.target.innerText;
+   const calcInput = document.getElementById('typed-numbers');
+  if(isNaN(number) ){
+     if(number == 'C'){
+         calcInput.value = ''
+     }
+  }
+   else{
+
+  
+   const previousNumber = calcInput.value;
+   const newNumber  = previousNumber + number;
+   calcInput.value = newNumber
+}
+})
+
+
+
+function verifyPin(){
+    const pin = document.getElementById('display-pin').value;
+    const typedNumbers = document.getElementById('typed-numbers').value;
+  const pinSuccess = document.getElementById('pin success');
+  const pinfaild = document.getElementById('pin-faild')
+    if(pin == typedNumbers){
+        pinSuccess.style.display = 'block';
+
+      pinfaild.style.display = 'none'
+
+    }
+    else{
+        pinSuccess.style.display = 'none';
+
+        pinfaild.style.display = 'block'
+    }
+}
