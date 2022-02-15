@@ -1,34 +1,58 @@
 
-function updateCaseNumber(product,isIncreseing,price){
-    let caseInput = document.getElementById(product + '-numbers');
-    let caseNumber = caseInput.value ;
+function updateProductNumber(product,isIncreseing,price){
+    let productInput = document.getElementById(product + '-numbers');
+    let productNumber = productInput.value ;
     if(isIncreseing == true){
-caseNumber = parseInt(caseNumber) + 1;
+productNumber = parseInt(productNumber) + 1;
     }
-    else if(caseNumber >0){
- caseNumber = parseInt(caseNumber) - 1;
+    else if(productNumber >0){
+ productNumber = parseInt(productNumber) - 1;
     }
-    caseInput.value = caseNumber;
+    productInput.value = productNumber;
 
     // update totla
-  const  caseTotal = document.getElementById(product + '-total');
-  caseTotal.innerText = caseNumber * price;
+  const  productTotal = document.getElementById(product + '-total');
+  productTotal.innerText = productNumber * price;
+
+  calculateTotal()
+
   
 }
 
+ function getInputValue(product){
+     const producntInput = document.getElementById(product +'-numbers');
+  const productNumber =parseFloat( producntInput.value);
+  return productNumber;
+ }
+function calculateTotal(){
+    
+    const phoneTotal = getInputValue('phone') * 1219;
+    const caseTotal = getInputValue('case') * 59;
 
+    const subTotal = phoneTotal + caseTotal;
+    const tax = subTotal / 10;
+    const  totalPrice = subTotal + tax;
+
+    // update on html
+
+    document.getElementById('sub-total').innerText = subTotal;
+   document.getElementById('tax-amount').innerText = tax;
+   document.getElementById('total-price').innerText= totalPrice;
+
+}
 document.getElementById('phone-plus').addEventListener('click',function(){
-    updateCaseNumber('phone',true,1219)
+    updateProductNumber('phone',true,1219);
+
 })
 document.getElementById('phone-minus').addEventListener('click',function(){
-    updateCaseNumber('phone',false,1219)
+    updateProductNumber('phone',false,1219)
 })
 
 document.getElementById('case-plus').addEventListener('click',function(){
-    updateCaseNumber('case',true,59)
+    updateProductNumber('case',true,59)
  
 })
 document.getElementById('case-minus').addEventListener('click',function(){
-     updateCaseNumber('case',false,59);
+     updateProductNumber('case',false,59);
 
-})
+}) 
